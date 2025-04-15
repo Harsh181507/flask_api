@@ -1,6 +1,5 @@
 from flask import Flask ,jsonify,request
 from createTableOperation import createTables
-from addOperation import createUser
 
 app=Flask(__name__)
 
@@ -17,7 +16,7 @@ def create_user():
     pincode=request.form['pincode']
     email=request.form['email']
 
-    userid=createUser(name=name,password=password,phone_number=phone_number,address=address,pincode=pincode,email=email)
+    userid=create_user(name=name,password=password,phone_number=phone_number,address=address,pincode=pincode,email=email)
 
     return userid
 
