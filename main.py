@@ -17,9 +17,9 @@ def create_user():
     pincode=request.form['pincode']
     email=request.form['email']
 
-    user_id=createUser(name=name,password=password,phone_number=phone_number,address=address,pincode=pincode,email=email)
+    userid=createUser(name=name,password=password,phone_number=phone_number,address=address,pincode=pincode,email=email)
 
-    return user_id
+    return userid
 
 
 
