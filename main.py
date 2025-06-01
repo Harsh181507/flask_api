@@ -1,7 +1,8 @@
 from flask import Flask, jsonify, request
 from createTableOpration import createTables
 from addOperation import create_User
-from readOperation import authenticate_user
+from readOperation import authenticate_user ,getAllUsers
+
 
 app= Flask(__name__)
 
@@ -38,6 +39,13 @@ def login():
             return jsonify({'meaage':user[1], 'status': 200})
         else:
             return jsonify({'message': 'Invalid email or password', 'status': 401})
+    except Exception as error:
+        return jsonify({'message': str(error), 'status': 400})
+
+@app.route('/getAllUsers', methods=['GET'])
+def get_All_Users():
+    try:
+        return jsonify(getAllUsers())
     except Exception as error:
         return jsonify({'message': str(error), 'status': 400})
 
