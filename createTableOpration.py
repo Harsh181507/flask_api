@@ -2,7 +2,7 @@ import sqlite3
 
 
 
-def create_table():
+def createTables():
     conn =sqlite3.connect('my_medicalShop.db')
     cursor = conn.cursor()
 
@@ -18,7 +18,7 @@ def create_table():
                 address VARCHAR(255),
                 email VARCHAR(255),
                 phone_number VARCHAR(255),
-                pin_code VARCHAR(255),
+                pin_code VARCHAR(255)
     )
 '''
 )
