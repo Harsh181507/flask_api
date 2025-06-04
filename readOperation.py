@@ -41,4 +41,16 @@ def getAllUsers():
 
     return userJson
 
+
+def getSpecificUser(userId):
+    conn = sqlite3.connect('my_medicalShop.db')
+    cursor= conn.cursor()
+    cursor.execute("SELECT * FROM Users WHERE user_id = ?", (userId,))
+    user = cursor.fetchone()
+    conn.close()
+
+
+    return user
+
+
    
