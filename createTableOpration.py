@@ -62,10 +62,8 @@ CREATE TABLE IF NOT EXISTS Sell_History(
                    price FLOAT,
                    total_amount FLOAT,
                    product_name VARCHAR(255),
-                   user_id VARCHAR(255),
-
+                   user_id VARCHAR(255)
                    )
-
     ''')
 
     conn.commit()
