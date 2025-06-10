@@ -66,6 +66,19 @@ CREATE TABLE IF NOT EXISTS Sell_History(
                    )
     ''')
 
+    cursor.execute('''
+CREATE TABLE IF NOT EXISTS User_Stock(
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   product_id VARCHAR(255),
+                   product_name VARCHAR(255),
+                   stock INT,
+                   price FLOAT,
+                   category VARCHAR(255),
+                   user_id VARCHAR(255),
+                   user_name VARCHAR(255)
+                   )
+    ''')
+
     conn.commit()
     conn.close()
 
