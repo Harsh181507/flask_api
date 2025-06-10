@@ -22,5 +22,34 @@ def createTables():
     )
 '''
 )
+    cursor.execute(''' 
+CREATE TABLE IF NOT EXISTS Products(
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                products_id VARCHAR(255),
+                name VARCHAR(255),
+                price FLOAT,
+                category VARCHAR(255),
+                stock INTEGER(225)
+)
+''')
+
+    cursor.execute('''
+CREATE TABLE IF NOT EXISTS Order_Details(
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                order_id VARCHAR(255),
+                user_id VARCHAR(255),
+                product_id VARCHAR(255),
+                isApproved BOOLEAN,
+                quantity INT,
+                date_of_order DATE,
+                price FLOAT)
+
+
+
+''')
+    
+
     conn.commit()
     conn.close()
+
+

@@ -2,6 +2,8 @@ from flask import Flask, jsonify, request
 from createTableOpration import createTables
 from addOperation import create_User
 from readOperation import authenticate_user ,getAllUsers , getSpecificUser
+from updateOperation import approve_user , update_user_details
+from delete import delete_specificUser
 
 
 app= Flask(__name__)
@@ -63,6 +65,112 @@ def get_Specific_User():
     except Exception as error:
         return jsonify({'message': str(error), 'status': 400})
 
+    
+
+@app.route('/approveUser', methods=['POST'])
+def approve_User():
+
+    try:
+        user_id = request.form['user_id']
+        isApprove = request.form['isApprove']
+
+
+        update= approve_user(userID=user_id, isApproved=isApprove)
+
+        return jsonify({'message': 'User approval status updated successfully', 'status': 200})
+    
+    
+    except Exception as error:
+        return jsonify({'message': str(error), 'status': 400})
+    
+
+@app.route('/updateUserAllDetails', methods=['PATCH'])
+def updateUserAllDetails():
+    try:
+        user_id = request.form['user_id']
+        
+
+        updateUser={}
+
+        for key, value in request.form.items():
+            if key != 'user_id':
+                updateUser[key] = value
+        update_user_details(userId=user_id, **updateUser)
+
+        return jsonify({'message': 'User details updated successfully', 'status': 200})
+    except Exception as error:
+        return jsonify({'message': str(error), 'status': 400})
+
+
+
+
+@app.route('/addProduct', methods=['POST'])
+def addProduct():
+    try:
+        name = request.form['name']
+        price = request.form['price']
+        category = request.form['category']
+        stock = request.form['stock']
+
+        add_product(name=name, price=price, category=category, stock=stock)
+        return jsonify({'message': 'Product added successfully', 'status': 200})
+    except Exception as error:
+        return jsonify({'message': str(error), 'status': 400})
+
+@app.route('/getAllProduct', methods=['GET'])
+def getAllProduct():
+    try:
+        return get_all_products()
+    except Exception as error:
+        return jsonify({'message': str(error), 'status': 400})
+    
+@app.route('/getSpecificProduct', methods=['POST'])
+def getSpecificProduct():
+    try:
+        product_id = request.form['products_id']
+        return jsonify(get_specific_product(product_id=str(product_id)))
+    except Exception as error:
+        return jsonify({'message': str(error), 'status': 400})
+
+
+@app.route('/addOrderDetails', methods=['POST'])
+def addOrderDetails():
+    try:
+        product_id = request.form['product_id']
+        user_id = request.form['user_id']
+        product_name = request.form['product_name']
+        user_name = request.form['user_name']
+        quantity = request.form['quantity']
+        message = request.form['message']
+        price = request.form['price']
+        category = request.form['category']
+
+        order_details(user_id=user_id,message=message, product_id=product_id, product_name=product_name, user_name=user_name, quantity=quantity, price=price, category=category)
+        return jsonify({'message': 'Order details added successfully', 'status': 200})
+    except Exception as error:
+        return jsonify({'message': str(error), 'status': 400})
+
+
+@app.route('/getAllOrdersDetail', methods=['GET'])
+def getAllOrdersDetail():
+    try:
+        return jsonify(get_all_orders_detail())
+    except Exception as error:
+        return jsonify({'message': str(error), 'status': 400})
+
+
+
+
+@app.route('/deleteSpecificUser', methods=['DELETE'])
+def deleteSpecificUser():
+    try:
+        userId = request.form['userID']
+
+        delete_specificUser(userId=userId)
+        return jsonify({'message': 'User deleted successfully', 'status': 200})
+       
+    except Exception as error:
+        return jsonify({'message': str(error), 'status': 400})
     
 if __name__=='__main__':
     createTables()

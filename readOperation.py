@@ -46,11 +46,25 @@ def getSpecificUser(userId):
     conn = sqlite3.connect('my_medicalShop.db')
     cursor= conn.cursor()
     cursor.execute("SELECT * FROM Users WHERE user_id = ?", (userId,))
-    user = cursor.fetchone()
+    users = cursor.fetchone()
     conn.close()
 
+    userJson ={
+            "id" :users[0],
+            "user_id": users[1],
+            "password": users[2],
+            "date_of_account_creation": users[3],
+            "isApproved": users[4],
+            "block": users[5],
+            "name": users[6],
+            "address": users[7],
+            "email": users[8],
+            "phone_number": users[9],
+            "pin_code": users[10]
+        }
 
-    return user
+
+    return userJson
 
 
    
