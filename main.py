@@ -25,7 +25,7 @@ def create_user():
 
         userId =create_User(name = name, password = password, email = email,address = address, phone_number = phone_number, pincode = pincode)
     
-        return jsonify({'message':str(userId), 'status':200})
+        return jsonify({'message': "User Created Successfully", 'status':200})
 
     except Exception as error:
         return jsonify({'message':str(error), 'status':400})
